@@ -3,6 +3,7 @@ import Header from "./components/header";
 import AppShirt from "./pages/shirt";
 import { Route, Routes } from "react-router-dom";
 import AppEstate from "./pages/estate";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (

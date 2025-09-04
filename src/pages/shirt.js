@@ -1,10 +1,28 @@
-import { Container, Form, Image, Table } from "react-bootstrap";
+import {
+  Card,
+  Container,
+  Form,
+  Image,
+  InputGroup,
+  Table,
+} from "react-bootstrap";
 import "./styles/shirt.css";
-import React from "react";
 
 export default function AppShirt() {
   const adultData = ["S", "M", "L", "X-Le", "2X-L", "3X-L", "4X-L", "5X-L"];
   const youthData = ["0-2", "3-6", "7-8", "10-12", "S", "M", "L", "X-Le"];
+  const styleData = [
+    "Short Sleeve",
+    "Long Sleeve",
+    "Tank Top",
+    "Hoodie",
+    "Sweatshirt",
+    "Raglan",
+    "Polo",
+    "V-Neck",
+    "Crew Neck",
+  ];
+  const paymentData = ["Cash", "Cheque", "Card", "Bank Transfer", "Others"];
   return (
     <Container fluid className="p-3">
       <div className="general-container">
@@ -12,7 +30,7 @@ export default function AppShirt() {
         <h1 className="title-holder">T-SHIRT ORDER FORM</h1>
         <hr className="line-break" />
       </div>
-      {/* -------------------------- ROW 1 --------------------------*/}
+      {/* -------------------------- ROW INPUT FORM --------------------------*/}
       <div className="row form-container">
         <div className="form-section col-5">
           <div className="form-group mb-3">
@@ -32,10 +50,11 @@ export default function AppShirt() {
       <div className="row form-container">
         <div className="form-section col-5">
           <div className="form-group mb-3">
-            <label className="form-label date-input">Order Date :</label>
+            <label className="form-label">Order Date :</label>
             <input type="text" className="form-control line-input" />
           </div>
         </div>
+
         <div className="form-section col-5 offset-1">
           <div className="form-group mb-3">
             <label className="form-label">Promise date :</label>
@@ -48,7 +67,7 @@ export default function AppShirt() {
       <div className="row form-container">
         <div className="form-section col-5">
           <div className="form-group mb-3">
-            <label className="form-label date-input">Phone :</label>
+            <label className="form-label">Phone :</label>
             <input type="text" className="form-control line-input" />
           </div>
         </div>
@@ -64,7 +83,7 @@ export default function AppShirt() {
       <div className="row form-container">
         <div className="form-section col-11">
           <div className="form-group mb-3">
-            <label className="form-label date-input">Address :</label>
+            <label className="form-label">Address :</label>
             <input type="text" className="form-control line-input" />
           </div>
         </div>
@@ -72,44 +91,21 @@ export default function AppShirt() {
 
       {/* -------------------------- ROW RADIO BUTTON --------------------------*/}
       <div className="row form-container radio-container mt-4">
-        <div className="radio-section col-11">
-          <Form className="d-flex justify-content-between">
-            <Form.Check
-              type="radio"
-              label="Bank Transfer"
-              name="exampleRadios"
-              id="radio1"
-              className="custom-radio"
-            />
-            <Form.Check
-              type="radio"
-              label="Card"
-              name="exampleRadios"
-              id="radio2"
-              className="custom-radio"
-            />
-            <Form.Check
-              type="radio"
-              label="Cash"
-              name="exampleRadios"
-              id="radio3"
-              className="custom-radio"
-            />
-            <Form.Check
-              type="radio"
-              label="Cheque"
-              name="exampleRadios"
-              id="radio2"
-              className="custom-radio"
-            />
-            <Form.Check
-              type="radio"
-              label="Others"
-              name="exampleRadios"
-              id="radio3"
-              className="custom-radio"
-            />
-          </Form>
+        <div className="radio-payment-section col-11">
+          <h4>Payment Menthod</h4>
+          <div className="radio-payment">
+            {paymentData.map((data, i) => (
+              <Form className="d-flex justify-content-between " key={i}>
+                <Form.Check
+                  type="radio"
+                  label={data}
+                  name="exampleRadios"
+                  id="radio1"
+                  className="custom-radio"
+                />
+              </Form>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -150,6 +146,106 @@ export default function AppShirt() {
         <div className="col-5">
           <Image src={require("../assets/shirt.png")} />
         </div>
+      </div>
+      {/* -------------------------- ROW RADIO STYLE BUTTON --------------------------*/}
+      <Form className="radio-grid radio-container">
+        {styleData.map((label, index) => (
+          <Form.Check
+            key={index}
+            type="radio"
+            label={label}
+            name="paymentMethod"
+            id={`radio-${index}`}
+            className="custom-radio"
+          />
+        ))}
+      </Form>
+
+      {/* - ------------------------ TABLE RESULT -------------------------- */}
+      <div className="row form-container shirt-option mt-4">
+        <div className="col-5">
+          <Card>
+            {/* image */}
+            <div className="card-image">
+              <div className="image-icon">
+                <i class="fa-solid fa-truck-fast"></i>
+              </div>
+              <div className="image-icon">
+                <i class="fa-brands fa-dropbox"></i>
+              </div>
+              <div className="image-icon">
+                <i class="fa-solid fa-boxes-packing"></i>
+              </div>
+            </div>
+
+            <div className="date-input">
+              <div className="form-group mb-3">
+                <label className="form-label">Shipping date :</label>
+                <input
+                  type="text"
+                  className="form-control line-input   shippping-line"
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label className="form-label"> Shipping tracking :</label>
+                <input
+                  type="text"
+                  className="Promise dateform-control line-input shippping-line"
+                />
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <div className="col-5">
+          <Table bordered className="text-center table-order">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>SUBTOTAL</strong>
+                </td>
+                <td>$0.00</td>
+              </tr>
+              <tr>
+                <td>SHIPPING</td>
+                <td>$0.00</td>
+              </tr>
+              <tr>
+                <td>DISCOUNTS</td>
+                <td>-$0.00</td>
+              </tr>
+              <tr>
+                <td>TAXES</td>
+                <td>$0.00</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>TOTAL</strong>
+                </td>
+                <td>
+                  <strong>$0.00</strong>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
+      </div>
+      {/* - ------------------------ NOTES FORM -------------------------- */}
+      <div className="row mt-4">
+        <h4>NOTES</h4>
+        <InputGroup size="lg" className="notes-form">
+          <Form.Control
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
+      </div>
+      {/* - ------------------------ FOOTER -------------------------- */}
+      <div className="row mt-4">
+        <h6 className="shirt-footer">
+          123-456-789 &nbsp; <a href="www.google.com"> www.form.com </a>&nbsp; |
+          city anywhere country anywhere
+        </h6>
       </div>
     </Container>
   );

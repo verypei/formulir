@@ -11,10 +11,14 @@
     align-items: center;  
 }
 
+.radio-payment{
+  margin-top:2%;
+}
+
 .industries-name{
     font-size: 50px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    color: rgb(244, 43, 43);
     margin-top: 0;
 }
 
@@ -34,6 +38,7 @@
   box-shadow: none !important;          
   background-color: transparent !important;
   padding-left: 0 !important;  
+  /* width :90% !important; */
 }
 
 .line-input:focus {
@@ -41,13 +46,22 @@
 }
 
 .form-group{
-    display: flex;
-    justify-content: flex-start;
-    padding-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;                 /* spacing between label and input */
 }
+
 .form-label{
-    width: 75px;
-    padding-top: 5px;
+  flex: 0 0 140px;           /* <-- fixed width, no shrinking */
+  text-align: left;
+  margin: 0;                 /* remove extra margins */
+  white-space: nowrap;       /* keep "Order Date" on one line */
+}
+
+.line-input{
+  flex: 1 1 auto;            /* input fills the rest */
+  width: auto;               /* override Bootstrap 100% if needed */
+  min-width: 0;              /* prevents overflow in tight layouts */
 }
 
 .radio-container .form-check-input {
@@ -59,6 +73,16 @@
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
+.radio-style-container{
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  border: 1px solid #050000;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+
 /* On hover */
 .radio-container .form-check-input:hover {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
@@ -67,9 +91,10 @@
 
 /* When selected */
 .radio-container .form-check-input:checked {
-  box-shadow: 0 0 10px rgba(65, 68, 70, 0.6); 
+  box-shadow: 0 0 10px rgba(21, 126, 196, 0.6); 
   border-color: #2196f3;
 }
+
 .checkbox{
     margin-left: 30px;
 }
@@ -79,6 +104,7 @@
     /* justify-content: flex; */
     /* flex-direction: column; */
 }
+
 .checkbox{
     margin-left: 40% !important;
 }
@@ -87,3 +113,57 @@
     padding-left: 20% !important;
 }
 
+.radio-style-section{
+  display: flex;
+  justify-content:space-between;
+  background-color: violet;
+}
+
+.radio-payment{
+display: flex;
+justify-content: space-between;
+}
+
+.radio-grid {
+  display: flex;
+  justify-content: space-between; 
+  flex-wrap: wrap;            
+  max-width: 100%;               
+  margin: 0 0;           
+}
+
+.radio-grid .custom-radio {
+  flex: 0 0 30%;     /* Around 3 columns per row with breathing room */
+  margin-bottom: 15px; /* Add vertical spacing between rows */
+}
+.card-image{
+  display: flex;
+  justify-content: space-around;
+  padding: 5% 2% 5% 2%;
+}
+
+.image-icon i {
+  font-size: 40px; /* make the icon bigger */
+  color: #333; /* icon color */
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  color: red;
+}
+
+.date-input{
+  padding: 2%;
+}
+
+.shippping-line{
+  width: 90%;
+}
+
+.table-order {
+  width: 100% !important;
+  table-layout: fixed; /* Optional: makes cells evenly spaced */
+}
+
+.shirt-footer{
+  display: flex;
+  justify-content: center;
+}
