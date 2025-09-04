@@ -159,8 +159,7 @@ justify-content: space-between;
 }
 
 .table-order {
-  width: 100% !important;
-  table-layout: fixed; /* Optional: makes cells evenly spaced */
+  height: 210px;
 }
 
 .shirt-footer{

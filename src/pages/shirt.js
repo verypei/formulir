@@ -197,7 +197,7 @@ export default function AppShirt() {
           </Card>
         </div>
 
-        <div className="col-5">
+        <div className="col-5 offset-1">
           <Table bordered className="text-center table-order">
             <tbody>
               <tr>
@@ -232,13 +232,15 @@ export default function AppShirt() {
       </div>
       {/* - ------------------------ NOTES FORM -------------------------- */}
       <div className="row mt-4">
-        <h4>NOTES</h4>
-        <InputGroup size="lg" className="notes-form">
-          <Form.Control
-            aria-label="Large"
-            aria-describedby="inputGroup-sizing-sm"
-          />
-        </InputGroup>
+        <div className="col-11">
+          <h4>NOTES</h4>
+          <InputGroup size="lg" className="notes-form">
+            <Form.Control
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+            />
+          </InputGroup>
+        </div>
       </div>
       {/* - ------------------------ FOOTER -------------------------- */}
       <div className="row mt-4">
