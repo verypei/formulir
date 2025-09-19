@@ -7,8 +7,13 @@ import {
   Table,
 } from "react-bootstrap";
 import "./styles/shirt.css";
+import { useState } from "react";
 
 export default function AppShirt() {
+  // ---------------------------- USE STATE ----------------------------
+  const [selected, setSelected] = useState({ column: null, index: null });
+
+  // ---------------------------- DATA ----------------------------
   const adultData = ["S", "M", "L", "X-Le", "2X-L", "3X-L", "4X-L", "5X-L"];
   const youthData = ["0-2", "3-6", "7-8", "10-12", "S", "M", "L", "X-Le"];
   const styleData = [
@@ -23,6 +28,13 @@ export default function AppShirt() {
     "Crew Neck",
   ];
   const paymentData = ["Cash", "Cheque", "Card", "Bank Transfer", "Others"];
+
+  // ------------------------- FUNCTION ----------------------------
+  const handleChange = (column, index) => {
+    console.log(column, index, "-------------");
+
+    setSelected({ column, index }); // only one selected at a time
+  };
   return (
     <Container fluid className="p-3">
       <div className="general-container">
@@ -129,13 +141,21 @@ export default function AppShirt() {
                       id={`adult-${index}`}
                       className="checkbox"
                       label={size}
+                      checked={
+                        selected.column === "adult" && selected.index === index
+                      }
+                      onChange={() => handleChange("adult", index)}
                     />
                   </td>
                   <td className="youth-data">
                     <Form.Check
                       type="checkbox"
-                      id={`adult-${index}`}
+                      id={`youth-${index}`}
                       label={youthData[index]}
+                      checked={
+                        selected.column === "youth" && selected.index === index
+                      }
+                      onChange={() => handleChange("youth", index)}
                     />
                   </td>
                 </tr>
