@@ -89,23 +89,23 @@ export default function AppShirt() {
         </div>
       </div>
 
-      {/* -------------------------- ROW RADIO BUTTON --------------------------*/}
+      {/* -------------------------- ROW RADIO PAYMENT BUTTON --------------------------*/}
       <div className="row form-container radio-container mt-4">
         <div className="radio-payment-section col-11">
-          <h4>Payment Menthod</h4>
-          <div className="radio-payment">
+          <h4>Payment Method</h4>
+          <Form className="radio-payment">
             {paymentData.map((data, i) => (
-              <Form className="d-flex justify-content-between " key={i}>
+              <div className="d-flex justify-content-between" key={i}>
                 <Form.Check
                   type="radio"
                   label={data}
-                  name="exampleRadios"
-                  id="radio1"
+                  name="paymentRadioMethods" // same group
+                  id={`radio-payment-${i}`} // unique id
                   className="custom-radio"
                 />
-              </Form>
+              </div>
             ))}
-          </div>
+          </Form>
         </div>
       </div>
 
@@ -154,7 +154,7 @@ export default function AppShirt() {
             key={index}
             type="radio"
             label={label}
-            name="paymentMethod"
+            name="styleRadioMethods"
             id={`radio-${index}`}
             className="custom-radio"
           />
