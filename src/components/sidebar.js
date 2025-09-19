@@ -8,8 +8,8 @@ function AppSidebar() {
         <Nav.Link href="/shirt" className="text-white">
           T-Shirt
         </Nav.Link>
-        <Nav.Link href="/estate" className="text-white">
-          Real Estate
+        <Nav.Link href="/human" className="text-white">
+          Human
         </Nav.Link>
         <Nav.Link href="#contact" className="text-white">
           Contact

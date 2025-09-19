@@ -1,0 +1,65 @@
+.clickable-body-wrapper {
+  width: 100%;
+  max-width: 360px; /* change as needed */
+  margin: 0 auto;
+  user-select: none;
+}
+
+.clickable-body-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* base visual for parts */
+.body-part path,
+.body-part rect,
+.body-part circle {
+  fill: #e6e6e6;
+  stroke: #666;
+  stroke-width: 1.5;
+  transition: fill 160ms ease, transform 120ms ease, stroke 160ms ease;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* hover */
+.body-part:hover path,
+.body-part:hover rect,
+.body-part:hover circle {
+  fill: #d0e8ff;
+  transform: translateY(-2px);
+}
+
+/* selected state */
+.body-part.selected path,
+.body-part.selected rect,
+.body-part.selected circle {
+  fill: #4aa3ff;
+  stroke: #1a6fb3;
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* keyboard focus outline */
+.body-part:focus {
+  outline: none;
+}
+.body-part:focus path,
+.body-part:focus rect,
+.body-part:focus circle {
+  stroke: #ff9900;
+  stroke-width: 2;
+}
+
+/* optional text showing selection */
+.selected-label {
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+}
+
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

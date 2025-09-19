@@ -2,7 +2,7 @@ import AppSidebar from "./components/sidebar";
 import Header from "./components/header";
 import AppShirt from "./pages/shirt";
 import { Route, Routes } from "react-router-dom";
-import AppEstate from "./pages/estate";
+import ClickableBody from "./pages/humanBody";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
           <div className="p-3">
             <Routes>
               <Route path="/shirt" element={<AppShirt />} />
-              <Route path="/estate" element={<AppEstate />} />
+              <Route path="/human" element={<ClickableBody />} />
             </Routes>
           </div>
         </div>
