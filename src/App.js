@@ -3,6 +3,7 @@ import Header from "./components/header";
 import AppShirt from "./pages/shirt";
 import { Route, Routes } from "react-router-dom";
 import ClickableBody from "./pages/humanBody";
+import { MemoryGames } from "./pages/games";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Routes>
               <Route path="/shirt" element={<AppShirt />} />
               <Route path="/human" element={<ClickableBody />} />
+              <Route path="/games" element={<MemoryGames />} />
             </Routes>
           </div>
         </div>

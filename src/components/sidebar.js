@@ -11,8 +11,8 @@ function AppSidebar() {
         <Nav.Link href="/human" className="text-white">
           Human
         </Nav.Link>
-        <Nav.Link href="#contact" className="text-white">
-          Contact
+        <Nav.Link href="/games" className="text-white">
+          Memory games
         </Nav.Link>
       </Nav>
     </div>
