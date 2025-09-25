@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 
 export function MemoryGames() {
@@ -35,17 +35,18 @@ export function MemoryGames() {
   const getTimeForLevel = (level) => {
     switch (level) {
       case 1:
-        return 10;
+        return 5;
       case 2:
-        return 20;
+        return 5;
       case 3:
-        return 30;
+        return 5;
       default:
         return 0;
     }
   };
 
   const handleLevelChange = (e) => {
+    resetAll();
     const selectedLevel = Number(e.target.value);
     setLevel(selectedLevel);
 
@@ -92,9 +93,10 @@ export function MemoryGames() {
     setActiveNum(true);
     setActiveScore("");
     setNumbers([]);
-    setInputs(Array(level).fill(""));
+    setInputs([]);
     setDisplayCircle("none");
     setButton({ status: true, str: "check" });
+    clearInterval(timerRef.current);
     setTimeLeft(0);
   };
 
