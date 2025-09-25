@@ -6,7 +6,7 @@ export function MemoryGames() {
   const [level, setLevel] = useState(0);
   const [activeNum, setActiveNum] = useState(true);
   const [score, setActiveScore] = useState("");
-  const [numbers, setNumbers] = useState([]);
+  const [challenge, setChallenge] = useState([]);
   const [button, setButton] = useState({ status: true, str: "check" });
   const [inputs, setInputs] = useState(Array(level).fill(""));
   const [timeLeft, setTimeLeft] = useState(0); // countdown timer
@@ -20,8 +20,14 @@ export function MemoryGames() {
       case 1:
         return 5;
       case 2:
-        return 10;
+        return 5;
       case 3:
+        return 10;
+      case 4:
+        return 10;
+      case 5:
+        return 15;
+      case 6:
         return 15;
       default:
         return 0;
@@ -32,17 +38,58 @@ export function MemoryGames() {
     return Array.from({ length: count }, () => Math.floor(Math.random() * 10));
   };
 
+  const generateRandomNumbersAndAlphabet = (count) => {
+    const chars =
+      "0123456789abcdefghijklmnopqrstuvwxyz0123456789ABCDEF0123456789GHIJKLMNOPQRSTUVWXYZ0123456789";
+    return Array.from(
+      { length: count },
+      () => chars[Math.floor(Math.random() * chars.length)]
+    );
+  };
+
   const getTimeForLevel = (level) => {
     switch (level) {
       case 1:
         return 5;
       case 2:
-        return 5;
+        return 10;
       case 3:
-        return 5;
+        return 15;
+      case 4:
+        return 20;
+      case 5:
+        return 25;
+      case 6:
+        return 30;
       default:
         return 0;
     }
+  };
+
+  const runProcedure = (selectedLevel) => {
+    const count = getCircleCount(selectedLevel);
+    if (selectedLevel % 2 === 0) {
+      setChallenge(generateRandomNumbersAndAlphabet(count));
+    } else {
+      setChallenge(generateRandomNumbers(count));
+    }
+
+    // set timer
+    const time = getTimeForLevel(selectedLevel);
+    setTimeLeft(time);
+
+    // start countdown
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current); // stop timer when it hits 0
+          setDisplayCircle("block");
+          setActiveNum(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
   };
 
   const handleLevelChange = (e) => {
@@ -55,44 +102,46 @@ export function MemoryGames() {
       setDisplayCircle("none");
     }
 
-    if (selectedLevel > 0) {
-      // generate numbers
-      const count = getCircleCount(selectedLevel);
-      setNumbers(generateRandomNumbers(count));
+    runProcedure(selectedLevel);
 
-      // set timer
-      const time = getTimeForLevel(selectedLevel);
-      setTimeLeft(time);
+    // if (selectedLevel > 0) {
+    //   // generate numbers
+    //   const count = getCircleCount(selectedLevel);
+    //   setNumbers(generateRandomNumbers(count));
 
-      // start countdown
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            clearInterval(timerRef.current); // stop timer when it hits 0
-            setDisplayCircle("block");
-            setActiveNum(false);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
+    //   // set timer
+    //   const time = getTimeForLevel(selectedLevel);
+    //   setTimeLeft(time);
+
+    //   // start countdown
+    //   timerRef.current = setInterval(() => {
+    //     setTimeLeft((prev) => {
+    //       if (prev <= 1) {
+    //         clearInterval(timerRef.current); // stop timer when it hits 0
+    //         setDisplayCircle("block");
+    //         setActiveNum(false);
+    //         return 0;
+    //       }
+    //       return prev - 1;
+    //     });
+    //   }, 1000);
+    // }
   };
 
   const handleInputChange = (value, index) => {
     // Only allow numbers 0-9
-    if (/^[0-9]?$/.test(value)) {
-      const updatedInputs = [...inputs];
-      updatedInputs[index] = +value;
-      setInputs(updatedInputs);
-    }
+    // if (/^[0-9]?$/.test(value)) {
+    const updatedInputs = [...inputs];
+    updatedInputs[index] = +value;
+    setInputs(updatedInputs);
+    // }
   };
 
   const resetAll = () => {
     setLevel(0);
     setActiveNum(true);
     setActiveScore("");
-    setNumbers([]);
+    setChallenge([]);
     setInputs([]);
     setDisplayCircle("none");
     setButton({ status: true, str: "check" });
@@ -103,8 +152,8 @@ export function MemoryGames() {
   const handleCheckScoring = (e) => {
     setActiveNum(true);
     if (
-      numbers.length === inputs.length &&
-      numbers.every((value, index) => value === inputs[index])
+      challenge.length === inputs.length &&
+      challenge.every((value, index) => value === inputs[index])
     ) {
       setActiveScore("good");
     } else {
@@ -135,6 +184,9 @@ export function MemoryGames() {
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
           </Form.Select>
         </div>
         <div className="col-5 offset-1">
@@ -156,7 +208,7 @@ export function MemoryGames() {
       <div className="row mt-4">
         <div className="col-12">
           <div className="d-flex flex-wrap gap-3">
-            {numbers.map((num, index) => (
+            {challenge.map((num, index) => (
               <div
                 key={index}
                 className="d-flex align-items-center justify-content-center"
@@ -182,7 +234,7 @@ export function MemoryGames() {
         <div>
           <div className="row mt-4 hidden">
             <div className="d-flex flex-wrap gap-3">
-              {numbers.map((num, index) => (
+              {challenge.map((num, index) => (
                 <div
                   key={index}
                   className="d-flex align-items-center justify-content-center"
