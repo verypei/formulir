@@ -4,7 +4,7 @@ import { Button, Container, Form } from "react-bootstrap";
 export function MemoryGames() {
   // --------------------------------- STATE ---------------------------------
   const [level, setLevel] = useState(0);
-  const [activeNum, setActiveNum] = useState(true);
+  const [activeInputs, setActiveInputs] = useState(true);
   const [score, setActiveScore] = useState("");
   const [challenge, setChallenge] = useState([]);
   const [button, setButton] = useState({ status: true, str: "check" });
@@ -84,7 +84,7 @@ export function MemoryGames() {
         if (prev <= 1) {
           clearInterval(timerRef.current); // stop timer when it hits 0
           setDisplayCircle("block");
-          setActiveNum(false);
+          setActiveInputs(false);
           return 0;
         }
         return prev - 1;
@@ -103,43 +103,17 @@ export function MemoryGames() {
     }
 
     runProcedure(selectedLevel);
-
-    // if (selectedLevel > 0) {
-    //   // generate numbers
-    //   const count = getCircleCount(selectedLevel);
-    //   setNumbers(generateRandomNumbers(count));
-
-    //   // set timer
-    //   const time = getTimeForLevel(selectedLevel);
-    //   setTimeLeft(time);
-
-    //   // start countdown
-    //   timerRef.current = setInterval(() => {
-    //     setTimeLeft((prev) => {
-    //       if (prev <= 1) {
-    //         clearInterval(timerRef.current); // stop timer when it hits 0
-    //         setDisplayCircle("block");
-    //         setActiveNum(false);
-    //         return 0;
-    //       }
-    //       return prev - 1;
-    //     });
-    //   }, 1000);
-    // }
   };
 
   const handleInputChange = (value, index) => {
-    // Only allow numbers 0-9
-    // if (/^[0-9]?$/.test(value)) {
     const updatedInputs = [...inputs];
-    updatedInputs[index] = +value;
+    updatedInputs[index] = value;
     setInputs(updatedInputs);
-    // }
   };
 
   const resetAll = () => {
     setLevel(0);
-    setActiveNum(true);
+    setActiveInputs(true);
     setActiveScore("");
     setChallenge([]);
     setInputs([]);
@@ -150,7 +124,7 @@ export function MemoryGames() {
   };
 
   const handleCheckScoring = (e) => {
-    setActiveNum(true);
+    setActiveInputs(true);
     if (
       challenge.length === inputs.length &&
       challenge.every((value, index) => value === inputs[index])
@@ -222,7 +196,7 @@ export function MemoryGames() {
                   fontSize: "20px",
                 }}
               >
-                {activeNum ? num : null}
+                {activeInputs ? num : null}
               </div>
             ))}
           </div>
